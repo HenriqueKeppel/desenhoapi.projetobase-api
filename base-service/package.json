@@ -1,0 +1,84 @@
+{
+  "name": "base-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "start:cluster": "node dist/index.js -i 0",
+    "build": "npm run clean && tsc && npm run swagger && copyfiles -u 1 src/**/*.json dist",
+    "clean": "rimraf dist",
+    "lint": "tslint ./src/**/*.ts ./test/**/*.ts",
+    "lint:fix": "tslint --fix ./src/**/*.ts ./test/**/*.ts -t verbose",
+    "postversion": "git push origin master",
+    "pretest": "cross-env NODE_ENV=test npm run build && npm run lint",
+    "swagger": "swaggerGen -c ./swagger.config.json",
+    "test": "cross-env NODE_ENV=test mocha --exit",
+    "test:coverage": "nyc npm test",
+    "tsc": "tsc"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text-summary",
+      "html"
+    ],
+    "sourceMap": true,
+    "instrument": true
+  },
+  "author": "Thiago Bustamante",
+  "license": "ISC",
+  "dependencies": {
+    "@eventstore.net/event.store": "^1.6.0",
+    "@types/mysql": "^2.15.6",
+    "argparse": "^1.0.10",
+    "compression": "^1.7.4",
+    "fs-extra-promise": "^1.0.1",
+    "json-rules-engine": "^2.3.6",
+    "lodash": "^4.17.11",
+    "mongodb": "^3.2.7",
+    "morgan": "^1.9.1",
+    "redis": "^2.8.0",
+    "rotating-file-stream": "^1.4.1",
+    "typescript-ioc": "^1.2.5",
+    "typescript-rest": "^1.8.1",
+    "typescript-rest-swagger": "0.0.19",
+    "winston": "3.1.0"
+  },
+  "devDependencies": {
+    "@types/argparse": "^1.0.36",
+    "@types/compression": "0.0.36",
+    "@types/fs-extra-promise": "^1.0.8",
+    "@types/lodash": "^4.14.133",
+    "@types/morgan": "^1.7.35",
+    "@types/winston": "^2.4.4",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "copyfiles": "^2.1.0",
+    "cross-env": "^5.2.0",
+    "mocha": "^5.2.0",
+    "nyc": "^14.1.1",
+    "rimraf": "^2.6.3",
+    "source-map-support": "^0.5.12",
+    "swagger-client": "^3.8.25",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.17.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.2.2"
+  },
+  "directories": {
+    "lib": "dist"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "engineStrict": true
+}

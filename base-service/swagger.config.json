@@ -1,0 +1,21 @@
+{
+    "swagger": {
+        "yaml": false,
+        "outputDirectory": "./dist",
+        "entryFile": "./src/interfaces/index.ts",        
+        "name": "Base Service API",
+        "description": "API exemplo da BuyMyTickets.",
+        "license": "MIT",
+        "basePath": "/",
+        "securityDefinitions": {
+            "Bearer": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        },
+        "produces": [
+            "application/json"
+        ]
+    }
+}
